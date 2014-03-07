@@ -247,6 +247,8 @@ int naptr_srv_query(const char *ifname, const char *name, int numeric, int af);
 /*mtk_net pcscf end*/
 int getaddrinfo(const char *, const char *, const struct addrinfo *, struct addrinfo **);
 int getnameinfo(const struct sockaddr *, socklen_t, char *, size_t, char *, size_t, int);
+int android_getnameinfoforiface(const struct sockaddr *, socklen_t, char *, size_t, char *, size_t, int, const char *, int);
+struct hostent	*android_gethostbyaddrforiface_proxy(const void *, socklen_t, int, const char *, int);
 void freeaddrinfo(struct addrinfo *);
 const char	*gai_strerror(int);
 void setnetgrent(const char *);
