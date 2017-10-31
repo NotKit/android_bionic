@@ -252,7 +252,10 @@ static prop_area* map_prop_area_rw(const char* filename, const char* context,
              * property separation.
              */
             if (fsetxattr_failed) {
-                *fsetxattr_failed = true;
+                /* It's going to fail without SELinux. Set fsetxattr_failed to false anyway
+                 * to avoid "init: Failed to initialize property area" error
+                 */
+                *fsetxattr_failed = false;
             }
         }
     }
