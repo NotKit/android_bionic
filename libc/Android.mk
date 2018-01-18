@@ -155,6 +155,7 @@ libc_bionic_ndk_src_files := \
     bionic/__libc_current_sigrtmin.cpp \
     bionic/libc_init_common.cpp \
     bionic/libc_logging.cpp \
+    bionic/log_is_loggable.c \
     bionic/libgen.cpp \
     bionic/link.cpp \
     bionic/locale.cpp \
@@ -690,6 +691,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_MODULE := libc_stack_protector
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -760,6 +777,23 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 LOCAL_C_INCLUDES := $(libc_common_c_includes) $(LOCAL_PATH)/tzcode/
 LOCAL_MODULE := libc_tzcode
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -800,6 +834,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
 
 LOCAL_MODULE := libc_dns
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -833,6 +883,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
 
 LOCAL_MODULE := libc_freebsd
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -870,6 +936,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
 
 LOCAL_MODULE := libc_netbsd
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -911,6 +993,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
     $(LOCAL_PATH)/upstream-openbsd/lib/libc/gdtoa/ \
 
 LOCAL_MODULE := libc_openbsd_ndk
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -949,6 +1047,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
     $(LOCAL_PATH)/upstream-openbsd/lib/libc/gdtoa/ \
 
 LOCAL_MODULE := libc_openbsd
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -988,6 +1102,22 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes) \
     $(LOCAL_PATH)/upstream-openbsd/lib/libc/include \
 
 LOCAL_MODULE := libc_gdtoa
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -1013,6 +1143,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast
 LOCAL_C_INCLUDES := $(libc_common_c_includes) bionic/libstdc++/include
 LOCAL_MODULE := libc_bionic
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -1042,6 +1188,28 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast
 LOCAL_C_INCLUDES := $(libc_common_c_includes) bionic/libstdc++/include
 LOCAL_MODULE := libc_bionic_ndk
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
+
+ifeq ($(HAVE_AEE_FEATURE),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    LOCAL_CFLAGS += -DDUMP_ABORT_MSG_FOR_DIRECT_COREDUMP
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -1052,6 +1220,20 @@ $(eval $(call patch-up-arch-specific-flags,LOCAL_CFLAGS,libc_common_cflags))
 $(eval $(call patch-up-arch-specific-flags,LOCAL_SRC_FILES,libc_bionic_ndk_src_files))
 include $(BUILD_STATIC_LIBRARY)
 
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
 
 # ========================================================
 # libc_pthread.a - pthreads parts that previously lived in
@@ -1072,6 +1254,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast
 LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_MODULE := libc_pthread
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -1124,6 +1322,22 @@ LOCAL_SRC_FILES_$(TARGET_2ND_ARCH) := $(call all-S-files-under,arch-$(TARGET_2ND
 endif
 LOCAL_MODULE := libc_syscalls
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
@@ -1145,6 +1359,22 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES_arm := arch-arm/bionic/__aeabi.c
 LOCAL_MODULE := libc_aeabi
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer -Wno-strict-aliasing
+      endif
+    endif
+  endif
+endif
+
 LOCAL_CFLAGS := $(libc_common_cflags) -fno-builtin
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_CXX_STL := none
@@ -1178,6 +1408,21 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_SANITIZE := never
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
 LOCAL_SYSTEM_SHARED_LIBRARIES :=
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
 
 LOCAL_SRC_FILES := \
     $(libc_common_src_files) \
@@ -1231,6 +1476,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_MODULE := libc_common
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_WHOLE_STATIC_LIBRARIES := \
     libc_bionic \
@@ -1288,6 +1549,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 
 LOCAL_MODULE := libc_nomalloc
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_WHOLE_STATIC_LIBRARIES := libc_common libc_init_static
 LOCAL_CXX_STL := none
@@ -1314,6 +1591,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_MODULE := libc_malloc
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_CXX_STL := none
 LOCAL_SANITIZE := never
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
@@ -1339,6 +1632,22 @@ LOCAL_CPPFLAGS := $(libc_common_cppflags)
 LOCAL_C_INCLUDES := $(libc_common_c_includes)
 LOCAL_MODULE := libc
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
 LOCAL_WHOLE_STATIC_LIBRARIES := libc_common libc_init_static libjemalloc
 
@@ -1373,6 +1682,22 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE := libc
 LOCAL_CLANG := $(use_clang)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_REQUIRED_MODULES := tzdata
 LOCAL_ADDITIONAL_DEPENDENCIES := \
     $(libc_common_additional_dependencies) \
@@ -1463,8 +1788,15 @@ LOCAL_C_INCLUDES := $(libc_common_c_includes)
 
 LOCAL_SRC_FILES := \
     bionic/libc_logging.cpp \
+    bionic/log_is_loggable.c \
 
 LOCAL_MODULE := libc_logging
+
+ifeq ($(HAVE_AEE_FEATURE),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    LOCAL_CFLAGS += -DDUMP_ABORT_MSG_FOR_DIRECT_COREDUMP
+  endif
+endif
 
 LOCAL_CLANG := $(use_clang)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
@@ -1490,6 +1822,22 @@ LOCAL_CFLAGS := $(libc_common_cflags)
 LOCAL_CPPFLAGS := $(libc_common_cppflags)
 
 # TODO: This is to work around b/24465209. Remove after root cause is fixed
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_LDFLAGS_arm := -Wl,--hash-style=both
 LOCAL_LDFLAGS_x86 := -Wl,--hash-style=both
 
@@ -1510,6 +1858,22 @@ include $(CLEAR_VARS)
 LOCAL_C_INCLUDES := $(libc_common_c_includes) bionic/libstdc++/include
 LOCAL_CFLAGS := $(libc_common_cflags)
 LOCAL_CPPFLAGS := $(libc_common_cppflags)
+
+#M: arm 32bit
+ifeq ($(MTK_USER_SPACE_DEBUG_FW),yes)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
+    ifneq ($(filter arm arm64,$(TARGET_ARCH)),)
+      ifeq ($(TARGET_IS_64_BIT),true)
+        LOCAL_CFLAGS_arm += -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS_arm += -marm -fno-omit-frame-pointer
+      else
+        LOCAL_CFLAGS +=  -marm -fno-omit-frame-pointer
+        LOCAL_CPPFLAGS += -marm -fno-omit-frame-pointer
+      endif
+    endif
+  endif
+endif
+
 LOCAL_SRC_FILES := $(libstdcxx_common_src_files)
 LOCAL_MODULE:= libstdc++
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk

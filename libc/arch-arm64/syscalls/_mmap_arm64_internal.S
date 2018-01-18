@@ -2,7 +2,7 @@
 
 #include <private/bionic_asm.h>
 
-ENTRY(mmap)
+ENTRY(_mmap_arm64_internal)
     mov     x8, __NR_mmap
     svc     #0
 
@@ -11,6 +11,4 @@ ENTRY(mmap)
     b.hi    __set_errno_internal
 
     ret
-END(mmap)
-
-ALIAS_SYMBOL(mmap64, mmap)
+END(_mmap_arm64_internal)

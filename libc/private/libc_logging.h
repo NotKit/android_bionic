@@ -69,6 +69,12 @@ struct abort_msg_t {
   char msg[0];
 };
 
+/*
+ * Use the per-tag properties "log.tag.<tagname>" to generate a runtime
+ * result of non-zero to expose a log.
+ */
+int __android_log_is_loggable(int prio, const char *tag, int def);
+
 //
 // Formats a message to the log (priority 'fatal'), then aborts.
 //

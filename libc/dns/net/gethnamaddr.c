@@ -186,13 +186,13 @@ debugprintf(const char *msg, res_state res, ...)
 
 #define BOUNDED_INCR(x) \
 	do { \
-		BOUNDS_CHECK(cp, x); \
+        BOUNDS_CHECK(cp, x); \
 		cp += (x); \
 	} while (/*CONSTCOND*/0)
 
 #define BOUNDS_CHECK(ptr, count) \
 	do { \
-		if (eom - (ptr) < (count)) \
+        if (eom - (ptr) < (count)) \
 			goto no_recovery; \
 	} while (/*CONSTCOND*/0)
 

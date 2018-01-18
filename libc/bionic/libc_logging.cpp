@@ -549,6 +549,8 @@ struct log_time { // Wire format
 };
 
 int __libc_write_log(int priority, const char* tag, const char* msg) {
+  if (!__android_log_is_loggable(priority, tag, ANDROID_LOG_VERBOSE))
+    return 0;
   int main_log_fd = __libc_open_log_socket();
   if (main_log_fd == -1) {
     // Try stderr instead.
@@ -678,8 +680,26 @@ void __libc_fatal(const char* format, ...) {
   abort();
 }
 
+#ifdef DUMP_ABORT_MSG_FOR_DIRECT_COREDUMP
+static void dump_abort_message_to_file(const char* msg) {
+  char file[64];
+  FILE *fp;
+
+  snprintf(file, sizeof(file), "/data/misc/aee_interim/abort_msg_%d", getpid());
+  fp = fopen(file, "w+");
+  if (fp != NULL) {
+    fprintf(fp, "%s", msg);
+    fclose(fp);
+  }
+}
+#endif
+
 void android_set_abort_message(const char* msg) {
   ScopedPthreadMutexLocker locker(&g_abort_msg_lock);
+
+#ifdef DUMP_ABORT_MSG_FOR_DIRECT_COREDUMP
+  dump_abort_message_to_file(msg);
+#endif
 
   if (__abort_message_ptr == NULL) {
     // We must have crashed _very_ early.

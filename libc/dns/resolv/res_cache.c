@@ -1,4 +1,9 @@
 /*
+* Copyright (C) 2014 MediaTek Inc.
+* Modification based on code covered by the mentioned copyright
+* and/or permission notice(s).
+*/
+/*
  * Copyright (C) 2008 The Android Open Source Project
  * All rights reserved.
  *
@@ -2129,6 +2134,7 @@ _resolv_populate_res_for_net(res_state statp)
             }
 
             if ((size_t) ai->ai_addrlen <= sizeof(statp->_u._ext.ext->nsaddrs[0])) {
+                //debug_log("netid=%u, dns%d:%s\n", statp->netid, nserv, info->nameservers[nserv]);
                 if (statp->_u._ext.ext != NULL) {
                     memcpy(&statp->_u._ext.ext->nsaddrs[nserv], ai->ai_addr, ai->ai_addrlen);
                     statp->nsaddr_list[nserv].sin_family = AF_UNSPEC;

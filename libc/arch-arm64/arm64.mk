@@ -19,6 +19,9 @@ libc_bionic_src_files_arm64 += \
     arch-arm64/generic/bionic/strnlen.S \
     arch-arm64/generic/bionic/wmemmove.S \
 
+libc_bionic_src_files_arm64 += \
+    bionic/mmap_arm64.cpp \
+
 libc_bionic_src_files_exclude_arm64 += \
     bionic/__memcpy_chk.cpp \
     bionic/strchr.cpp \
@@ -62,7 +65,7 @@ endif
 ifneq ($(TARGET_CPU_VARIANT),generic)
 cpu_variant_mk := $(LOCAL_PATH)/arch-arm64/$(TARGET_CPU_VARIANT)/$(TARGET_CPU_VARIANT).mk
 ifeq ($(wildcard $(cpu_variant_mk)),)
-$(error "TARGET_CPU_VARIANT not set or set to an unknown value. Possible values are generic, denver64. Use generic for devices that do not have a CPU similar to any of the supported cpu variants.")
+$(error "TARGET_CPU_VARIANT not set or set to an unknown value. Possible values are generic, cortex-a53, denver64. Use generic for devices that do not have a CPU similar to any of the supported cpu variants.")
 endif
 include $(cpu_variant_mk)
 libc_common_additional_dependencies += $(cpu_variant_mk)
