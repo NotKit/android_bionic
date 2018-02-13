@@ -1079,7 +1079,11 @@ int __system_property_area_init()
         return -1;
     }
     initialized = true;
+#if 0
     return fsetxattr_failed ? -2 : 0;
+#else
+    return 0;
+#endif
 }
 
 unsigned int __system_property_area_serial()
